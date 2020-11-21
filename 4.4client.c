@@ -7,10 +7,11 @@
 
 int main(int argc , char *argv[])
 {
-	int socket_desc;
+	int socket_desc, new_socket, c;
 	struct sockaddr_in server; 
+	struct sockaddr_in Baruclient;
         char *message, server_reply[2000];
-	char buffer[2000];
+	char buffer[2000], msg[2000];
 	
 	
 	//Create socket
@@ -45,29 +46,14 @@ int main(int argc , char *argv[])
 			exit(1);
 		}
 
-		if(recv(socket_desc, buffer, 2000, 0) < 0){
+		if(recv(socket_desc, server_reply, 2000, 0) < 0){
 			printf("[-]Error in receiving data.\n");
-		}else{
-			printf("Server: \t%s\n", buffer);
 		}
+		printf("Server :%s\n",server_reply);
+//		else{
+//			printf("Server: \t%s\n", buffer);
+//		}
 	}
-
-
-	//Send some data
-//	message = "connect";
-//	if( send(socket_desc , message , strlen(message) , 0) < 0)
-//	{
-//		puts("Send failed");
-//		return 1;
-//	}
-//	puts("Data Send\n");
-        //Receive a reply from the server
-//	if( recv(socket_desc, server_reply , 2000 , 0) < 0)
-//	{
-//		puts("recv failed");
-//	}
-//	puts("Reply received\n");
-//	puts(server_reply);
 	close(socket_desc);
 	return 0;
 }
